@@ -1,34 +1,42 @@
 # Trojan Detection
-Code for generic probabilistic methodologies to identify hardware trojans in arbitrary hardware designs
+Some generic probabilistic methodologies to identify hardware trojans in arbitrary hardware designs
 
 Given a golden bitstream, verilog design + input/output to serial wrapper
 1. Differentiate between bitstreams that have trojans
 2. Identify the trojans, their functionality, and how they are triggered
 
-The bitstreams can be loaded onto a [basys3 FPGA dev board]() for testing
+The bitstreams can be loaded onto a [basys3 FPGA dev board](https://digilent.com/shop/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/) for testing
 
 Directory
-- [Project Directory]() 
-- [Quickstart]()
-- [Motivation]()
-- [Methodologies]()
+- [Project Directory](#project-directory) 
+- [Quickstart](#quickstart)
+- [Motivation](#motivation)
+- [Methodologies](#methodologies)
     - Combinational Trojan Detection
-        - [Pseudorandom Input/Output Comparisons]()
-- [Loading a Bitstream Without Vivado]()
-- [Resources]()
-- [References]()
+        - [Pseudorandom Input/Output Comparisons](#pseudorandom-inputoutput-comparison)
+- [Loading a Bitstream Without Vivado](#loading-a-bitstream-without-vivado)
+- [Resources](#resources)
+- [References](#references)
 
 # Project Directory
+| Name                                   | Purpose                                       | 
+| :--                                    | :--                                           |
+|[bitfiles](bitfiles)                    | Bitstreams, verilog and design documentation  |
+|[img](img)                              | Extra docs & demo recordings                  |
+|[tests](tests)                          | Input/Output Testing scripts                  |
+|[.gitignore](.gitignore)                | Git configuration file                        |   
+|[makefile](makefile)                    | Rule based scripting file, great for projects |
 
 # Quickstart
 Dependencies 
-- [Basys3 FPGA dev board]()
-- [python 3.6^^]()
-    - [pyserial]()
+- [Basys3 FPGA dev board](https://digilent.com/shop/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/)
+- [python 3.1^^](https://www.python.org/downloads/)
+    - [pyserial](https://pypi.org/project/pyserial/)
 - [openOCD](https://openocd.org/pages/getting-openocd.html)
+- [git](https://git-scm.com/) & [bash](https://www.gnu.org/software/bash/)
 ```
-git clone .. && cd ..
-make # shows a help menu
+git clone https://github.com/BarakBinyamin/Trojan-Detection.git && cd Trojan-Detection
+make
 ```
 ```
 ╔═╗╔═╗╔═╗╔═╗  ╔╦╗┬─┐┌─┐ ┬┌─┐┌┐┌  ╔╦╗┌─┐┌┬┐┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
@@ -38,12 +46,14 @@ make # shows a help menu
 Finding hardware trojans in FPGA bitsreams...
 Made by Rocky https://linkedin.com/in/barak-binyamin-664a211a1 
 usage: make <option>
-        1g : upload c432_train_safe bitstream and launch python test
-        1b : upload c432_train_trojan bitstream and launch python test
+        lg1     : upload c432_train_safe bitstream and launch python test
+        lb1     : upload c432_train_trojan bitstream and launch python test
+        golden1 : collect golden response values using psudorandom inputs
+        test1   : run test of bitstream against recorded values
 ```
 
 
-# Verbose Descripiton
+# Motivation
 TODO Key terms table
 TODO Project description
 
