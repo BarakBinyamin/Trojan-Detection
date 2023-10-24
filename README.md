@@ -59,7 +59,7 @@ TODO Project description
 
 # Methodologies
 ## Pseudorandom Input/Output Comparison
-This method be used to detect a combinational trojan
+This method be used to detect a combinational trojan, [follow the demo program](tests/method1/demo) to try it yourself
 
 TODO, EQUATIONS for probability of finding combinational trojan
 
