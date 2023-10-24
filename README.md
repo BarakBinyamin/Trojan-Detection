@@ -46,8 +46,8 @@ make
 Finding hardware trojans in FPGA bitsreams...
 Made by Rocky https://linkedin.com/in/barak-binyamin-664a211a1 
 usage: make <option>
-        lg1     : upload c432_train_safe bitstream and launch python test
-        lb1     : upload c432_train_trojan bitstream and launch python test
+        lg1     : upload c432_train_safe bitstream 
+        lb1     : upload c432_train_trojan bitstream
         golden1 : collect golden response values using psudorandom inputs
         test1   : run test of bitstream against recorded values
 ```
