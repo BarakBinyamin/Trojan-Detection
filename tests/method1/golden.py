@@ -4,13 +4,14 @@ from tqdm import tqdm
 import time
 import json
 import random 
+import argparse
 
 BAUD_RATE            = 115200
 OUTPUT_FILE          = "tests/out/responses.json"
 RESPONSES            = {}
-NUM_BYTES_TO_RECIEVE = 1
-NUM_BYTES_TO_SEND    = 5
-NUM_BITS_OF_INPUT    = 36
+NUM_BYTES_TO_RECIEVE = 16  #1
+NUM_BYTES_TO_SEND    = 23  #5
+NUM_BITS_OF_INPUT    = 178 #36
 NUM_SAMPLES          = 1000
 
 def findDigilentUSB():
@@ -59,6 +60,18 @@ def writeOut():
         outfile.write(serialized_json)
 
 if (__name__ == "__main__"):
+    parser = argparse.ArgumentParser(
+                    prog='test',
+                    description='test suite for finding trojans')
+    parser.add_argument('-r', '--recieve', required=True, help="NUM BYTES TO RECIEVE", dest="recieve", type=int) 
+    parser.add_argument('-s', '--send', required=True, help="NUM BYTES TO SEND", dest="send", type=int) 
+    parser.add_argument('-b', '--bits', required=True, help="NUM BITS OF INPUT", dest="bits", type=int) 
+    args = parser.parse_args()
+
+    NUM_BYTES_TO_RECIEVE = args.recieve #16  #1
+    NUM_BYTES_TO_SEND    = args.send    #23  #5
+    NUM_BITS_OF_INPUT    = args.bits    #178 #36
+
     print("\n\n------------------- Starting up test program for c432... -------------------")
     usbDevice = findDigilentUSB()
     getGoldenValues(usbDevice)
