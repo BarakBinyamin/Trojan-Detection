@@ -14,6 +14,7 @@ Directory
 - [Methodologies](#methodologies)
     - Combinational Trojan Detection
         - [Pseudorandom Input/Output Comparisons](#pseudorandom-inputoutput-comparison)
+        - [Divide and conquer with Automatic Test Pattern Gerneation for stuck at faults](#divide--conquer-using-atlanta)
 - [Loading a Bitstream Without Vivado](#loading-a-bitstream-without-vivado)
 - [Resources](#resources)
 - [References](#references)
@@ -71,6 +72,16 @@ Steps:
 
 Example:
 TODO GIF
+
+## Divide & Conquer Using Atlanta
+This method be used to detect a combinational trojan
+
+1. Identify bottle necks (down to one gate) in a design, where is alot of traffic going through
+2. Use Atlanta to find inputs that should make that gate satified (evaulate to 1)
+    1. This process will make that gate a psudo-output 
+    2. Gather expected outputs from the inputs
+    3. Verify tested outputs samples match expected values, if some don't we know there's a higher likelyhood the trojan lies behind that bottleneck
+
 # Loading a Bitstream Without Vivado
 
 # Resources
@@ -79,6 +90,7 @@ TODO GIF
 - [Digilent Forum: easiest way to upload series 7 bitstream to fpga](https://forum.digilent.com/topic/20046-programming-fpga-boards-from-a-mac/)
 - [Ascii art generator by patorjk](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
 - [Making gifs from videos with ffmpeg](https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality)
+- [Atlanta ATGP Stuck-At fault testing tool](https://github.com/hsluoyz/Atalanta)
 
 # References
 - [Dr. Michael Zuzak](https://www.rit.edu/directory/mjzeec-michael-zuzak), _CMPE 361 Intro to Hardware Security Course_ & Advising, Contact For Resources
