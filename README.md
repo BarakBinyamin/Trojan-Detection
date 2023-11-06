@@ -75,6 +75,13 @@ Steps:
 Example:
 TODO GIF
 
+## Simple Output Analysis
+- What bits are effected can be derived from which bit postions ever differed from an expected value
+
+## Simple Input Analysis
+- Associating number accurances of 1's and 0's in bit positions with it's liklyhood to be part of the trigger
+
+
 ## Divide & Conquer Using Atlanta
 This method be used to detect a combinational trojan
 
@@ -83,6 +90,10 @@ This method be used to detect a combinational trojan
     1. This process will make that gate a psudo-output 
     2. Gather expected outputs from the inputs
     3. Verify tested outputs samples match expected values, if some don't we know there's a higher likelyhood the trojan lies behind that bottleneck
+
+```
+--- Method Not Explored ----
+```
 
 # Loading a Bitstream Without Vivado
 
