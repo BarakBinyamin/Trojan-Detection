@@ -50,15 +50,15 @@ t1:
 	BITSTREAM=bitfiles/3_train/c6288_trojan.bit openocd -f bitfiles/openOCD-BASYS3.txt
 	python3 tests/method1/index.py --mode test --filename tests/out/golden3.json --recieve 4 --send 4 --bits 32
 	# Test
-	# BITSTREAM=bitfiles/1_test/c499_1.bit openocd -f bitfiles/openOCD-BASYS3.txt
-	# printf "\n\nTEST: c499_1\n\n"
-	# python3 tests/method1/index.py --mode test --filename tests/out/golden4.json --recieve 4 --send 6 --bits 41
-	# BITSTREAM=bitfiles/1_test/c499_2.bit openocd -f bitfiles/openOCD-BASYS3.txt
-	# printf "\n\nTEST: c499_2\n\n"
-	# python3 tests/method1/index.py --mode test --filename tests/out/golden4.json --recieve 4 --send 6 --bits 41
-	# BITSTREAM=bitfiles/2_test/c1908_1.bit openocd -f bitfiles/openOCD-BASYS3.txt
-	# printf "\n\nTEST: c1908_1\n\n"
-	# python3 tests/method1/index.py --mode test --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
-	# BITSTREAM=bitfiles/2_test/c1908_2.bit openocd -f bitfiles/openOCD-BASYS3.txt
-	# printf "\n\nTEST: c1908_2\n\n"
-	# python3 tests/method1/index.py --mode test --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
+	BITSTREAM=bitfiles/1_test/c499_1.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	printf "\n\nTEST: c499_1\n\n"
+	python3 tests/method1/index.py --mode test --filename tests/out/golden4.json --recieve 4 --send 6 --bits 41
+	BITSTREAM=bitfiles/1_test/c499_2.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	printf "\n\nTEST: c499_2\n\n"
+	python3 tests/method1/index.py --mode test --filename tests/out/golden4.json --recieve 4 --send 6 --bits 41
+	BITSTREAM=bitfiles/2_test/c1908_1.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	printf "\n\nTEST: c1908_1\n\n"
+	python3 tests/method1/index.py --mode test --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
+	BITSTREAM=bitfiles/2_test/c1908_2.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	printf "\n\nTEST: c1908_2\n\n"
+	python3 tests/method1/index.py --mode test --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
