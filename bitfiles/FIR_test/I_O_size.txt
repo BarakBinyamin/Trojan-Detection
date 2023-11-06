@@ -1,0 +1,2 @@
+Input : 32 bits 
+Output : 32 bits

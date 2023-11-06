@@ -5,3 +5,6 @@
 
 # Trojan
 
+Ybus instead of xbus
+
+Effected bits: 

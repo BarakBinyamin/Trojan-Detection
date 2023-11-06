@@ -16,6 +16,7 @@ Directory
         - [Pseudorandom Input/Output Comparisons](#pseudorandom-inputoutput-comparison)
         - [Divide and conquer with Automatic Test Pattern Gerneation for stuck at faults](#divide--conquer-using-atlanta)
 - [Loading a Bitstream Without Vivado](#loading-a-bitstream-without-vivado)
+- [Known Issues]()
 - [Resources](#resources)
 - [References](#references)
 
@@ -33,6 +34,7 @@ Dependencies
 - [Basys3 FPGA dev board](https://digilent.com/shop/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/)
 - [python 3.1^^](https://www.python.org/downloads/)
     - [pyserial](https://pypi.org/project/pyserial/)
+    - [numpy](https://pypi.org/project/numpy/)
 - [openOCD](https://openocd.org/pages/getting-openocd.html)
 - [git](https://git-scm.com/) & [bash](https://www.gnu.org/software/bash/)
 ```
@@ -40,6 +42,7 @@ git clone https://github.com/BarakBinyamin/Trojan-Detection.git && cd Trojan-Det
 make
 ```
 ```
+
 ╔═╗╔═╗╔═╗╔═╗  ╔╦╗┬─┐┌─┐ ┬┌─┐┌┐┌  ╔╦╗┌─┐┌┬┐┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
 ╠╣ ╠═╝║ ╦╠═╣   ║ ├┬┘│ │ │├─┤│││   ║║├┤  │ ├┤ │   │ ││ ││││
 ╚  ╩  ╚═╝╩ ╩   ╩ ┴└─└─┘└┘┴ ┴┘└┘  ═╩╝└─┘ ┴ └─┘└─┘ ┴ ┴└─┘┘└┘
@@ -47,10 +50,9 @@ make
 Finding hardware trojans in FPGA bitsreams...
 Made by Rocky https://linkedin.com/in/barak-binyamin-664a211a1 
 usage: make <option>
-        lg1     : upload c432_train_safe bitstream 
-        lb1     : upload c432_train_trojan bitstream
-        golden1 : collect golden response values using psudorandom inputs
-        test1   : run test of bitstream against recorded values
+        s1     : Collect golden samples using psudorandom input generation for all training/test safe bitstreams
+        t1     : Run simple tests comparing psudorandom input responses on all training/test trojan bitstreams 
+
 ```
 
 
@@ -83,6 +85,9 @@ This method be used to detect a combinational trojan
     3. Verify tested outputs samples match expected values, if some don't we know there's a higher likelyhood the trojan lies behind that bottleneck
 
 # Loading a Bitstream Without Vivado
+
+# Known Issues
+- [ ] bitstream train 2, method 1 test sometimes get asyncronized and returns starnge results
 
 # Resources
 - [Wiki: Automatic test pattern generation](https://en.wikipedia.org/wiki/Automatic_test_pattern_generation)
