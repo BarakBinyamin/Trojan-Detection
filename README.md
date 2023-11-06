@@ -62,7 +62,7 @@ TODO Project description
 
 # Methodologies
 ## Pseudorandom Input/Output Comparison
-This method be used to detect a combinational trojan, [follow the demo program](tests/method1/demo1.sh) to try it yourself
+This method can be used to detect a combinational trojan
 
 TODO, EQUATIONS for probability of finding combinational trojan
 
@@ -75,11 +75,19 @@ Steps:
 Example:
 TODO GIF
 
-## Simple Output Analysis
-- What bits are effected can be derived from which bit postions ever differed from an expected value
+### Simple Output Analysis
+What bits are effected can be derived from which bit positions ever differed from an expected value
 
-## Simple Input Analysis
-- Associating number accurances of 1's and 0's in bit positions with it's liklyhood to be part of the trigger
+The percentage of outputs that differ from expected values could be used to gain information about how many inputs the trigger has. A higher percentage of outputs affected likely means a looser or larger trigger. 
+```
+looser (input[0] OR input[1]) VS (input[0]  AND input[1])
+```
+```
+larger (input[0] OR input[1] OR input[2]) VS (input[0] OR input[1])
+``` 
+
+### Simple Input Analysis
+Associating number accurances of 1's and 0's in bit positions with it's liklyhood to be part of the trigger
 
 
 ## Divide & Conquer Using Atlanta
