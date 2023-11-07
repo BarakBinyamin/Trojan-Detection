@@ -106,7 +106,7 @@ This method be used to detect a combinational trojan
 # Loading a Bitstream Without Vivado
 
 # Known Issues
-- [ ] bitstream train 2, method 1 test sometimes get asyncronized and returns starnge results
+- [ ] bitstream train 2, method 1 sometimes returns strange results, it's likely serial coms getting desynchronized
 
 # Resources
 - [Wiki: Automatic test pattern generation](https://en.wikipedia.org/wiki/Automatic_test_pattern_generation)

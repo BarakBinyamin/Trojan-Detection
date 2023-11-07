@@ -1,0 +1,213 @@
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+mbinyamtorsMBP2:Trojan-Detection mbinyamin$ make
+
+╔═╗╔═╗╔═╗╔═╗  ╔╦╗┬─┐┌─┐ ┬┌─┐┌┐┌  ╔╦╗┌─┐┌┬┐┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
+╠╣ ╠═╝║ ╦╠═╣   ║ ├┬┘│ │ │├─┤│││   ║║├┤  │ ├┤ │   │ ││ ││││
+╚  ╩  ╚═╝╩ ╩   ╩ ┴└─└─┘└┘┴ ┴┘└┘  ═╩╝└─┘ ┴ └─┘└─┘ ┴ ┴└─┘┘└┘
+
+Finding hardware trojans in FPGA bitsreams...
+Made by Rocky https://linkedin.com/in/barak-binyamin-664a211a1 
+usage: make <option>
+        s1     : Collect golden samples using psudorandom input generation for all training/test safe bitstreams
+        t1     : Run simple tests comparing psudorandom input responses on all training/test trojan bitstreams 
+
+mbinyamtorsMBP2:Trojan-Detection mbinyamin$ make s1
+Collecting samples for all bitstreams...Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:15<00:00, 62.53it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden1.json
+
+------------------- End of Sample Collection... -------------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.50it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden2.json
+
+------------------- End of Sample Collection... -------------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.44it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden3.json
+
+------------------- End of Sample Collection... -------------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:15<00:00, 62.50it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden4.json
+
+------------------- End of Sample Collection... -------------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.45it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden5.json
+
+------------------- End of Sample Collection... -------------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Collecting samples... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:12<00:00, 79.36it/s]
+
+Connection closed...
+
+Wrote sample file out to tests/out/golden6.json
+
+------------------- End of Sample Collection... -------------------

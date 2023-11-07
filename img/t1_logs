@@ -1,0 +1,423 @@
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+mbinyamtorsMBP2:Trojan-Detection mbinyamin$ make
+
+╔═╗╔═╗╔═╗╔═╗  ╔╦╗┬─┐┌─┐ ┬┌─┐┌┐┌  ╔╦╗┌─┐┌┬┐┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
+╠╣ ╠═╝║ ╦╠═╣   ║ ├┬┘│ │ │├─┤│││   ║║├┤  │ ├┤ │   │ ││ ││││
+╚  ╩  ╚═╝╩ ╩   ╩ ┴└─└─┘└┘┴ ┴┘└┘  ═╩╝└─┘ ┴ └─┘└─┘ ┴ ┴└─┘┘└┘
+
+Finding hardware trojans in FPGA bitsreams...
+Made by Rocky https://linkedin.com/in/barak-binyamin-664a211a1 
+usage: make <option>
+        s1     : Collect golden samples using psudorandom input generation for all training/test safe bitstreams
+        t1     : Run simple tests comparing psudorandom input responses on all training/test trojan bitstreams 
+
+mbinyamtorsMBP2:Trojan-Detection mbinyamin$ make t1
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.45it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|████████| 1000/1000 [00:00<00:00, 1117587.00it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 36 bits
+        Output: 8 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [5]
+
+        116 out of 1000, 11.60% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [35, 20, 12, 3, 2, 1, 0]
+
+        If sequential, output[index-1] input trigger bits are likely to include [3, 2, 1, 0]
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.37it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 734168.39it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 178 bits
+        Output: 128 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [100  99  97  96  95  94  93  92  91  88  87  86  85  84  83  82  81  80
+  79  78  77  76  75  74  64  62  56  50  45  44  43]
+
+        52 out of 1000, 5.20% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [18, 14, 20, 16, 5, 4, 3, 2, 1, 0]
+
+        If sequential, output[index-1] input trigger bits are likely to include [20, 16, 5, 4, 3, 2, 18, 14, 1, 0]
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.46it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 815695.06it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 32 bits
+        Output: 32 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [28]
+
+        14 out of 1000, 1.40% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [13, 2, 29, 25, 6]
+
+        If sequential, output[index-1] input trigger bits are likely to include [29, 25, 6, 13, 2, 1, 0]
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+TEST: c499_1
+
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.40it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 536767.85it/s]
+
+------------------- Trojan Report... -------------------
+
+No trojan detected
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+TEST: c499_2
+
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.50it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 624152.38it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 41 bits
+        Output: 32 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [15]
+
+        3 out of 1000, 0.30% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [45, 42, 36, 21, 13, 10, 43, 24, 22, 17, 16, 8, 6, 5, 4, 3, 2, 1, 0]
+
+        If sequential, output[index-1] input trigger bits are likely to include [29, 27, 25, 24, 23, 22, 17, 16, 11, 8, 6, 5, 4, 3, 2, 21, 15, 13, 10, 1, 0]
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+TEST: c1908_1
+
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:15<00:00, 62.50it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 362986.07it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 33 bits
+        Output: 32 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [11 10  9  8  7  6  5  4]
+
+        249 out of 1000, 24.90% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [14, 6, 5, 4, 3, 2, 1, 0]
+
+        If sequential, output[index-1] input trigger bits are likely to include [6, 5, 4, 3, 2, 1, 0]
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+TEST: c1908_2
+
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.50it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|████████| 1000/1000 [00:00<00:00, 1470653.58it/s]
+
+------------------- Trojan Report... -------------------
+
+No trojan detected
+
+------------------- End of Trojan Report... ----------------
+
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+DEPRECATED! use 'adapter driver' not 'interface'
+DEPRECATED! use 'ftdi device_desc' not 'ftdi_device_desc'
+DEPRECATED! use 'ftdi vid_pid' not 'ftdi_vid_pid'
+DEPRECATED! use 'ftdi channel' not 'ftdi_channel'
+DEPRECATED! use 'ftdi layout_init' not 'ftdi_layout_init'
+DEPRECATED! use 'adapter speed' not 'adapter_khz'
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+Warn : libusb_detach_kernel_driver() failed with LIBUSB_ERROR_ACCESS, trying to continue anyway
+Info : ftdi: if you experience problems at higher adapter clocks, try the command "ftdi tdo_sample_edge falling"
+Info : clock speed 10000 kHz
+Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+
+0362d093
+Programming FPGA...
+
+
+TEST: Trojan FIR
+
+
+
+------------------- Starting up test... -------------------
+Found Digilent USB: /dev/cu.usbserial-210183B821631
+Connected to /dev/cu.usbserial-210183B821631 at 115200 baud
+
+Collecting sample responses from device
+Collecting Responses: 100%|████████████| 1000/1000 [00:16<00:00, 62.22it/s]
+
+Connection closed...
+
+Comparing Responses: 100%|█████████| 1000/1000 [00:00<00:00, 605675.67it/s]
+
+------------------- Trojan Report... -------------------
+
+Trojan Detected
+
+
+Given:
+        Input: 32 bits
+        Output: 32 bits
+
+Analysis:
+        It appears that the trojan effects the following bits of the output
+                (0..N-1) (Msb to Lsb): [31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8
+  7  6  5  4  3  2  1  0]
+
+        229 out of 1000, 22.90% of the outputs were effected
+
+        The combinational input trigger bits are likely to include [11]
+
+        If sequential, output[index-1] input trigger bits are likely to include [16, 1, 0]
+
+------------------- End of Trojan Report... ----------------

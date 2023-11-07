@@ -31,7 +31,9 @@ s1:
 	python3 tests/method1/index.py --mode collect --filename tests/out/golden4.json --recieve 4 --send 6 --bits 41
 	BITSTREAM=bitfiles/2_test/c1908_safe.bit openocd -f bitfiles/openOCD-BASYS3.txt
 	python3 tests/method1/index.py --mode collect --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
-
+	BITSTREAM=bitfiles/FIR_test/original_design/FIR_safe.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	python3 tests/method1/index.py --mode collect --filename tests/out/golden6.json --recieve 4 --send 4 --bits 32
+	
 .PHONY: c1
 c1:
 	BITSTREAM=bitfiles/1_train/c432_safe.bit  openocd -f bitfiles/openOCD-BASYS3.txt
@@ -62,3 +64,6 @@ t1:
 	BITSTREAM=bitfiles/2_test/c1908_2.bit openocd -f bitfiles/openOCD-BASYS3.txt
 	printf "\n\nTEST: c1908_2\n\n"
 	python3 tests/method1/index.py --mode test --filename tests/out/golden5.json --recieve 4 --send 5 --bits 33
+	BITSTREAM=bitfiles/FIR_test/FIR_filter_T1/FIR_trojan.bit openocd -f bitfiles/openOCD-BASYS3.txt
+	printf "\n\nTEST: Trojan FIR\n\n"
+	python3 tests/method1/index.py --mode test --filename tests/out/golden6.json --recieve 4 --send 4 --bits 32

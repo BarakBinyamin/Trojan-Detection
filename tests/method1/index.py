@@ -71,22 +71,21 @@ def collect_samples(usbDevice):
 #            msb to lsb, msb to lsb
 #   returns [maxIndeces, different_list]
 def determine_bits_effected(golden,triggers):
-    tiggerInputs  = list(triggers.keys())   # Get the input values as a list    
+    tiggerInputs  = list(triggers.keys())        # Get the input values as a list    
         
-    # msb to lsb
     bits_in_list   = NUM_BYTES_TO_RECIEVE * 8
-    different_list = [0] * (bits_in_list)
+    different_list = [0] * (bits_in_list)        # msb to lsb
     for index in range(len(tiggerInputs)):
         golden_output = bin(int(golden[tiggerInputs[index]],  INTERPRET_BASE_OPTION))[2:].zfill(NUM_BYTES_TO_RECIEVE*8)
         trojan_output = bin(int(triggers[tiggerInputs[index]],INTERPRET_BASE_OPTION))[2:].zfill(NUM_BYTES_TO_RECIEVE*8)
         for bit in range((NUM_BYTES_TO_RECIEVE*8)-1,-1,-1):
             trojan_different_from_golden = int(golden_output[bit]) ^ int(trojan_output[bit])
             if (trojan_different_from_golden):
-                # msb to lsb
                 different_list[bits_in_list-1-bit]=different_list[bits_in_list-1-bit]+1
+
     # A list of bit positions that the golden output differed from the trojan output, ordered msb to lsb
     bits_effected = np.flip(np.sort(np.where(np.array(different_list)>0)[0]).tolist())
-    return [bits_effected,different_list]
+    return [bits_effected, different_list]
 
 # Return true if trojan found
 def compare_responses(expected, actual):
@@ -114,12 +113,41 @@ def check_input_bits(triggers):
             else:
                ones_list[bit] += 1
     # The and all case
-    # print(ones_list)
-    # print(zeros_list)
+    #print(ones_list)
+    #print(zeros_list)
     maxCount = max(ones_list)
     high  = np.flip(np.sort(np.where(np.array(ones_list)==maxCount)[0])).tolist()
     low   = np.flip(np.sort(np.where(np.array(ones_list)==0)[0])).tolist()
     return high + low
+
+def simple_sequential_check(triggers):
+    inputs         = list(triggers.keys())
+    bits_in_list   = NUM_BYTES_TO_SEND * 8
+    bits_in_output = NUM_BYTES_TO_RECIEVE * 8
+
+    # msb to lsb
+    input_list      = [0] * (bits_in_list)
+    output_list     = [0] * (bits_in_output)
+    for index in range(len(triggers)):
+        trigger     = bin(int(inputs[index],INTERPRET_BASE_OPTION))[2:].zfill(bits_in_list)
+        prev_output = bin(int(inputs[index-1],INTERPRET_BASE_OPTION))[2:].zfill(bits_in_list) if (index!=0) else None
+        # Input 
+        for bit in range(bits_in_list-1,-1,-1):
+            if (trigger[bit]=='0'):
+               input_list[bit] += 1
+        # Previous output
+        if (index!=0):
+            for bit in range(bits_in_output-1,1,-1):
+                if (prev_output[bit]=='0'):
+                    output_list[bit] += 1
+    # print("In", input_list)
+    # print("Out-1", output_list)
+    maxCount = max(output_list)
+    high  = np.flip(np.sort(np.where(np.array(output_list)==maxCount)[0])).tolist()
+    low   = np.flip(np.sort(np.where(np.array(output_list)==0)[0])).tolist()
+    return high + low
+
+
 
 def write_out(samples, output_file):
     serialized_json = json.dumps(samples, indent=4)
@@ -146,9 +174,9 @@ def test(sample_file):
 
     print("\n------------------- Trojan Report... -------------------\n")
     if(trojanDetected):
-        #check_triggers(TRIGGERS)
         [bits_effected, different_list] = determine_bits_effected(goldenSamples, triggers)
-        trigger_bits = check_input_bits(triggers)
+        trigger_bits    = check_input_bits(triggers)
+        sequential_bits = simple_sequential_check(triggers)
 
         num_samples    = NUM_SAMPLES
         num_trojan     = len(triggers.keys())
@@ -159,14 +187,17 @@ def test(sample_file):
         print("\tInput:",NUM_BITS_OF_INPUT,"bits")
         print("\tOutput:",NUM_BYTES_TO_RECIEVE*8,"bits")
 
-        print("\nTests:")
+        print("\nAnalysis:")
         print("\tIt appears that the trojan effects the following bits of the output")
         print("\t\t(0..N-1) (Msb to Lsb):",bits_effected)
 
         #print("\t\tDerived from the difference table:", different_list)
         print(f'\n\t{num_trojan} out of {num_samples}, {percent_trojan:.2f}% of the outputs were effected')
 
-        print(f'\n\tThe input trigger bits are likely to include {trigger_bits}')
+        print(f'\n\tThe combinational input trigger bits are likely to include {trigger_bits}')
+
+        print(f'\n\tIf sequential, output[index-1] input trigger bits are likely to include {sequential_bits}')
+
 
         # print("\n\tThe trojan trigger may involve the following bits:")
         # print("\t\t(0..N-1) (msb to lsb):",maxIndeces)
